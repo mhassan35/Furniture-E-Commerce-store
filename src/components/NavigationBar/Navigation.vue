@@ -1,7 +1,18 @@
 <template>
   <header class="navbar">
     <div class="navbar-logo">
-      <span>Furniro</span>
+      <span>
+        <svg width="150" height="40" viewBox="0 0 220 60" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(40, 10)">
+            <rect x="0" y="0" width="12" height="40" fill="#B68B40"/>
+            <rect x="18" y="0" width="12" height="40" fill="#A37E39"/>
+            <rect x="0" y="17.5" width="30" height="5" fill="#FFFFFF"/>
+          </g>
+          <text x="80" y="40" font-size="30" font-weight="600" fill="#000000">
+            F<tspan dx="2">U</tspan><tspan dx="2">R</tspan><tspan dx="2">N</tspan><tspan dx="2">O</tspan>
+          </text>
+        </svg>
+      </span>
     </div>
 
     <button class="menu-btn" @click="toggleMenu">
@@ -100,11 +111,9 @@ const toggleLike = () => {
 
   .navbar-logo {
     span {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #000000;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      justify-content: center;
+      align-items: center;
+      display: flex;
     }
   }
 
