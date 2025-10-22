@@ -19,13 +19,13 @@
           </div>
         </div>
       </section>
-      <BrowseTheRange />
+      <ShowCaseProd />
     </main>
   </div>
 </template>
 <script setup>
 import Navigation from '@/components/NavigationBar/Navigation.vue';
-import BrowseTheRange from './components/features/BrowseTheRange.vue';
+import ShowCaseProd from '@/components/features/ShowCaseProd.vue';
 </script>
 
 <style scoped>
