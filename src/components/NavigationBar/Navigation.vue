@@ -17,7 +17,7 @@
     <nav class="navbar-center desktop-only">
       <ul class="navbar-menu">
         <li v-for="(btn, i) in centerButtons" :key="i">
-          <a href="#">
+          <a href="/">
             {{ btn.label }}
           </a>
         </li>
