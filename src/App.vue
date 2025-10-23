@@ -1,6 +1,6 @@
 <template>
   <div id="app-container">
-    <Navigation />
+    <Navigation/>
     <main>
       <section class="hero-section">
         <div class="hero-image-dimmer"></div>
@@ -19,13 +19,16 @@
           </div>
         </div>
       </section>
-      <ShowCaseProd />
+      <ShowCaseProd/>
+      <ProductsShowCase/>
     </main>
   </div>
 </template>
 <script setup>
 import Navigation from '@/components/NavigationBar/Navigation.vue';
 import ShowCaseProd from '@/components/features/ShowCaseProd.vue';
+import ProductsShowCase from './components/Products/ProductsShowCase.vue';
+
 </script>
 
 <style scoped>

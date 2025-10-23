@@ -16,7 +16,6 @@
         </div>
     </div>
 </template>
-
 <script setup>
 import { categories } from '@/components/features/subComponent/imagesData'; 
 </script>
