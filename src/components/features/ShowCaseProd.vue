@@ -27,15 +27,14 @@
   
     .title {
       font-size: 2rem;
-      font-weight: 700;
+      font-weight: 600;
       color: #222;
-      margin-bottom: 0.5rem;
     }
   
     .subtitle {
       font-size: 1.1rem;
       color: #555;
-      margin-bottom: 2.5rem;
+      margin-bottom: 0.5rem;
     }
   
     .category-grid {
