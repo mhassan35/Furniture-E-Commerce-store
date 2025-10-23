@@ -117,7 +117,7 @@ onMounted(async () => {
       flex-direction: column;
       border: 1px solid #ccc;
 
-      this is just layer for handle image width and height
+      // this is just layer for handle image width and height
     // .image-wrapper {
       //   width: 100%;
       //   aspect-ratio: 16 / 11;
