@@ -125,7 +125,11 @@ onMounted(async () => {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.5rem;
+  margin: 0 auto;
+  max-width: 1200px;
+  justify-items: center; 
   margin-top: 1rem;
+  padding: 1rem 0;
 }
 
 .card {
@@ -136,6 +140,7 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border: 1px solid gray;
 
   &:hover {
     transform: translateY(-6px);
@@ -210,7 +215,6 @@ onMounted(async () => {
   }
 }
 
-/* 🔹 Modal Styles */
 .modal-overlay {
   position: fixed;
   inset: 0;
