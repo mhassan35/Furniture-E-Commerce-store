@@ -37,7 +37,10 @@
 
     <div class="navbar-icons desktop-only">
       <ul>
-        <li><i class="fa-solid fa-cart-shopping"/></li>
+        <li class="cart-wrapper" @click="goToCart">
+          <i class="fa-solid fa-cart-shopping"/>
+          <span v-if="cartCount > 0" class="cart-count">{{ cartCount }}</span>
+        </li>
         <li><i class="fa-solid fa-user" @click="toggleProfile"/></li>
         <li><i class="fa-solid fa-magnifying-glass" @click="toggleSearch"/></li>
         <li class="like-wrapper" @click="toggleLike">
@@ -59,11 +62,14 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed, onMounted } from "vue";
+import { useRouter } from "vue-router";
 import { centerButtons } from "./subComponents/NavigationData";
 import MobileMenu from "./MobileNav.vue";
 import SearchBar from "./subComponents/SearchBar.vue";
 import Profile from "./subComponents/Profile.vue";
+
+const router = useRouter();
 
 const isMenuOpen = ref(false);
 const showSearch = ref(false);
@@ -71,6 +77,7 @@ const isShowingProfile = ref(false);
 
 const isLiked = ref(false);
 const likeCount = ref(0);
+const cartCount = ref(0);
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
@@ -98,6 +105,26 @@ const toggleLike = () => {
     likeCount.value++;
   }
 };
+
+const goToCart = () => {
+  router.push('/cart');
+};
+
+const updateCartCount = () => {
+  const cart = localStorage.getItem('cart');
+  if (cart) {
+    const cartItems = JSON.parse(cart);
+    cartCount.value = cartItems.reduce((total, item) => total + item.quantity, 0);
+  } else {
+    cartCount.value = 0;
+  }
+};
+
+onMounted(() => {
+  updateCartCount();
+  // Listen for cart updates
+  window.addEventListener('cartUpdated', updateCartCount);
+});
 </script>
 
 <style scoped>
@@ -169,6 +196,27 @@ const toggleLike = () => {
     .like-count {
       font-size: 1rem;
       color: #28a745;
+      font-weight: 600;
+    }
+
+    .cart-wrapper {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #e74c3c;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
       font-weight: 600;
     }
   }

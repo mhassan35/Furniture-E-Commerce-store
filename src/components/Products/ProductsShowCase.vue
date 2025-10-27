@@ -40,14 +40,17 @@
       :product="selectedProduct"
       :closeModal="closeModal"
     />
-    <button class="more-product">
-      More Produect
+    <button class="more-product" @click="goToShop">
+      More Products
     </button>
   </div>
 </template>
 <script setup>
 import { ref, onMounted } from "vue"
+import { useRouter } from "vue-router"
 import ProductDetails from "./ProductDetails.vue"
+
+const router = useRouter()
 
 const products = ref([])
 const loading = ref(true)
@@ -64,6 +67,10 @@ const openModal = (product) => {
 const closeModal = () => {
   showModal.value = false
   selectedProduct.value = null
+}
+
+const goToShop = () => {
+  router.push('/shop')
 }
 
 onMounted(async () => {

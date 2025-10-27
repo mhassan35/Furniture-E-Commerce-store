@@ -28,10 +28,16 @@
                 ${{ item.price.toFixed(2) }}
               </span>
             </div> 
-            <button class="details-btn" @click="openModal(item)">
-              <i class="fas fa-info-circle"/> 
-              More Details
-            </button>
+            <div class="card-actions">
+              <button class="details-btn" @click="openModal(item)">
+                <i class="fas fa-info-circle"/> 
+                More Details
+              </button>
+              <button class="add-to-cart-btn" @click="addToCart(item)">
+                <i class="fas fa-shopping-cart"/> 
+                Add to Cart
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -64,6 +70,31 @@
   const closeModal = () => {
     showModal.value = false
     selectedProduct.value = null
+  }
+  
+  const addToCart = (product) => {
+    // Get existing cart from localStorage
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]')
+    
+    // Check if product already exists in cart
+    const existingItem = cart.find(item => item.id === product.id)
+    
+    if (existingItem) {
+      existingItem.quantity += 1
+    } else {
+      cart.push({
+        ...product,
+        quantity: 1
+      })
+    }
+    
+    // Save to localStorage
+    localStorage.setItem('cart', JSON.stringify(cart))
+    
+    // Trigger cart update event
+    window.dispatchEvent(new CustomEvent('cartUpdated'))
+    
+    alert(`${product.name} added to cart!`)
   }
   
   onMounted(async () => {
@@ -174,6 +205,12 @@
             }
           }
   
+          .card-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-direction: column;
+          }
+
           .details-btn {
             background: #1e88e5;
             color: white;
@@ -182,13 +219,31 @@
             padding: 0.6rem 1rem;
             cursor: pointer;
             transition: background 0.3s;
-  
+
             i {
               margin-right: 0.4rem;
             }
-  
+
             &:hover {
               background: #1565c0;
+            }
+          }
+
+          .add-to-cart-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.6rem 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+
+            i {
+              margin-right: 0.4rem;
+            }
+
+            &:hover {
+              background: #218838;
             }
           }
         }

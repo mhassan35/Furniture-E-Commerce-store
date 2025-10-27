@@ -11,7 +11,10 @@
 
       <div class="navbar-icons">
         <ul>
-          <li><i class="fa-solid fa-cart-shopping" /></li>
+          <li class="cart-wrapper" @click="goToCart">
+            <i class="fa-solid fa-cart-shopping" />
+            <span v-if="cartCount > 0" class="cart-count">{{ cartCount }}</span>
+          </li>
           <li><i class="fa-solid fa-user" @click="toggleProfile" /></li>
           <li><i class="fa-solid fa-magnifying-glass" @click="toggleSearch" /></li>
           <li class="like-wrapper" @click="toggleLike">
@@ -38,7 +41,10 @@
 <script setup>
 import SearchBar from "./subComponents/SearchBar.vue";
 import Profile from "./subComponents/Profile.vue";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 defineProps({
   centerButtons: Array,
@@ -50,6 +56,7 @@ const isShowingProfile = ref(false);
 
 const isLiked = ref(false);
 const likeCount = ref(0);
+const cartCount = ref(0);
 
 const toggleSearch = () => {
   showSearch.value = !showSearch.value;
@@ -73,6 +80,26 @@ const toggleLike = () => {
     likeCount.value++;
   }
 };
+
+const goToCart = () => {
+  router.push('/cart');
+};
+
+const updateCartCount = () => {
+  const cart = localStorage.getItem('cart');
+  if (cart) {
+    const cartItems = JSON.parse(cart);
+    cartCount.value = cartItems.reduce((total, item) => total + item.quantity, 0);
+  } else {
+    cartCount.value = 0;
+  }
+};
+
+onMounted(() => {
+  updateCartCount();
+  // Listen for cart updates
+  window.addEventListener('cartUpdated', updateCartCount);
+});
 </script>
 
 <style scoped>
@@ -156,6 +183,27 @@ const toggleLike = () => {
       .like-count {
         font-size: 0.9rem;
         color: #28a745;
+        font-weight: 600;
+      }
+
+      .cart-wrapper {
+        position: relative;
+        cursor: pointer;
+      }
+
+      .cart-count {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: #e74c3c;
+        color: white;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
         font-weight: 600;
       }
     }
