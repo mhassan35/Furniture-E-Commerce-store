@@ -40,6 +40,9 @@
       :product="selectedProduct"
       :closeModal="closeModal"
     />
+    <button class="more-product">
+      More Produect
+    </button>
   </div>
 </template>
 <script setup>
@@ -65,7 +68,7 @@ const closeModal = () => {
 
 onMounted(async () => {
   try {
-    const res = await fetch("https://furniture-api.fly.dev/v1/products?limit=100")
+    const res = await fetch("https://furniture-api.fly.dev/v1/products?limit=12")
     const data = await res.json()
     if (!data.success) throw new Error("Failed to fetch products")
     products.value = data.data
@@ -189,6 +192,19 @@ onMounted(async () => {
           }
         }
       }
+    }
+  }
+  .more-product {
+    background: #1e88e5;
+    color: white;
+    border: none;
+    margin-top: 8px;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+    &:hover {
+      background: #1565c0;
     }
   }
 }

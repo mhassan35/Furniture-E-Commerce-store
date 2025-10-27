@@ -28,9 +28,9 @@
     <nav class="navbar-center desktop-only">
       <ul class="navbar-menu">
         <li v-for="(btn, i) in centerButtons" :key="i">
-          <a href="/">
+          <router-link :to="btn.route || '/'" class="nav-link">
             {{ btn.label }}
-          </a>
+          </router-link>
         </li>
       </ul>
     </nav>
@@ -126,7 +126,7 @@ const toggleLike = () => {
       padding: 0;
 
       li {
-        a {
+        a, .nav-link {
           text-decoration: none;
           color: #000000;
           font-size: 1.1rem;

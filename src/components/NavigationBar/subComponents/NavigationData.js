@@ -1,6 +1,6 @@
 export const centerButtons = [
-    { label: "Home" },
-    { label: "Shop" },
-    { label: "Blog" },
-    { label: "Contact" }
+    { label: "Home", route: "/" },
+    { label: "Shop", route: "/shop" },
+    { label: "Blog", route: "/" },
+    { label: "Contact", route: "/" }
   ];
