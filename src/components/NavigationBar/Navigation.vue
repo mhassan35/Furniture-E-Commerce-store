@@ -14,17 +14,14 @@
         </svg>
       </span>
     </div>
-
     <button class="menu-btn" @click="toggleMenu">
       <i class="fa-solid fa-bars"></i>
     </button>
-
     <MobileMenu
       v-if="isMenuOpen"
       :centerButtons="centerButtons"
       :rightButtons="rightButtons"
     />
-
     <nav class="navbar-center desktop-only">
       <ul class="navbar-menu">
         <li v-for="(btn, i) in centerButtons" :key="i">
@@ -34,14 +31,15 @@
         </li>
       </ul>
     </nav>
-
     <div class="navbar-icons desktop-only">
       <ul>
         <li class="cart-wrapper" @click="goToCart">
           <i class="fa-solid fa-cart-shopping"/>
           <span v-if="cartCount > 0" class="cart-count">{{ cartCount }}</span>
         </li>
-        <li><i class="fa-solid fa-user" /></li>
+        <li>
+          <Profile />
+        </li>
       </ul>
     </div>
   </header>
@@ -52,11 +50,11 @@ import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { centerButtons } from "./subComponents/NavigationData";
 import MobileMenu from "./MobileNav.vue";
+import Profile from "./subComponents/profile.vue";
 
 const router = useRouter();
 
 const isMenuOpen = ref(false);
-
 const cartCount = ref(0);
 
 const toggleMenu = () => {

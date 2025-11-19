@@ -8,14 +8,15 @@
           </li>
         </ul>
       </nav>
-
       <div class="navbar-icons">
         <ul>
           <li class="cart-wrapper" @click="goToCart">
             <i class="fa-solid fa-cart-shopping" />
             <span v-if="cartCount > 0" class="cart-count">{{ cartCount }}</span>
           </li>
-          <li><i class="fa-solid fa-user"/></li>
+          <li>
+            <Profile />
+          </li>
         </ul>
       </div>
     </div>
@@ -25,6 +26,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
+import Profile from "./subComponents/profile.vue";
 
 const router = useRouter();
 
@@ -34,7 +36,6 @@ defineProps({
 });
 
 const cartCount = ref(0);
-
 
 const goToCart = () => {
   router.push('/cart');
@@ -52,7 +53,6 @@ const updateCartCount = () => {
 
 onMounted(() => {
   updateCartCount();
-  // Listen for cart updates
   window.addEventListener('cartUpdated', updateCartCount);
 });
 </script>
@@ -90,7 +90,8 @@ onMounted(() => {
       margin: 0;
       padding: 0;
 
-      li a, li .nav-link {
+      li a,
+      li .nav-link {
         text-decoration: none;
         color: #000000;
         font-size: 1.1rem;
