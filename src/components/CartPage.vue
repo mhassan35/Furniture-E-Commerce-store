@@ -244,7 +244,9 @@ onMounted(() => {
   height: 100%;
   object-fit: cover;
 }
-
+.item-details {
+  padding-left: 1rem;
+}
 .item-details h3 {
   font-size: 1.1rem;
   font-weight: 600;

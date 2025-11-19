@@ -114,7 +114,7 @@ onMounted(async () => {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 1.5rem;
-    margin: 0 auto;
+    margin: 1rem auto;
     max-width: 1200px;
     justify-items: center;
 
