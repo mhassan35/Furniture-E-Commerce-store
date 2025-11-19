@@ -1,7 +1,7 @@
 <template>
   <header class="navbar">
     <div class="navbar-logo">
-      <span>
+      <span class="logo-new">
         <svg width="150" height="40" viewBox="0 0 220 60" xmlns="http://www.w3.org/2000/svg">
           <g transform="translate(40, 10)">
             <rect x="0" y="0" width="12" height="40" fill="#B68B40"/>
@@ -91,7 +91,8 @@ onMounted(() => {
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 
   .navbar-logo {
-    span {
+    .logo-new {
+      user-select: none;
       justify-content: center;
       align-items: center;
       display: flex;
