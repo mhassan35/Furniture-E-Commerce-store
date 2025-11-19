@@ -2,14 +2,12 @@
   <div class="cart-page">
     <div class="container">
       <h1 class="page-title">Shopping Cart</h1>
-      
       <div v-if="cartItems.length === 0" class="empty-cart">
         <i class="fas fa-shopping-cart"></i>
         <h2>Your cart is empty</h2>
         <p>Add some products to get started!</p>
         <router-link to="/shop" class="shop-btn">Continue Shopping</router-link>
       </div>
-
       <div v-else class="cart-content">
         <div class="cart-items">
           <div class="cart-item" v-for="(item, index) in cartItems" :key="item.id">
@@ -41,7 +39,6 @@
             </button>
           </div>
         </div>
-
         <div class="cart-summary">
           <h3>Order Summary</h3>
           <div class="summary-row">
@@ -59,12 +56,10 @@
           <div class="summary-row total">
             <span>Total:</span>
             <span>${{ total.toFixed(2) }}</span>
-          </div>
-          
+          </div>  
           <button @click="proceedToCheckout" class="checkout-btn">
             Proceed to Checkout
           </button>
-          
           <router-link to="/shop" class="continue-shopping">
             Continue Shopping
           </router-link>
