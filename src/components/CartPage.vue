@@ -195,7 +195,7 @@ onMounted(() => {
 .shop-btn {
   background: #3498db;
   color: white;
-  padding: 1rem 2rem;
+  padding: 0.5rem 1rem;
   border-radius: 6px;
   text-decoration: none;
   font-weight: 600;

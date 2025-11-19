@@ -41,69 +41,26 @@
           <i class="fa-solid fa-cart-shopping"/>
           <span v-if="cartCount > 0" class="cart-count">{{ cartCount }}</span>
         </li>
-        <li><i class="fa-solid fa-user" @click="toggleProfile"/></li>
-        <li><i class="fa-solid fa-magnifying-glass" @click="toggleSearch"/></li>
-        <li class="like-wrapper" @click="toggleLike">
-          <i
-            class="fa-solid fa-thumbs-up"
-            :class="{ liked: isLiked }"
-          />
-          <span v-if="likeCount > 0" class="like-count">{{ likeCount }}</span>
-        </li>
+        <li><i class="fa-solid fa-user" /></li>
       </ul>
-      <Profile :visible="isShowingProfile" />
-      <SearchBar
-        :visible="showSearch"
-        @search="handleSearch"
-        @close="showSearch = false"
-      />
     </div>
   </header>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { centerButtons } from "./subComponents/NavigationData";
 import MobileMenu from "./MobileNav.vue";
-import SearchBar from "./subComponents/SearchBar.vue";
-import Profile from "./subComponents/Profile.vue";
 
 const router = useRouter();
 
 const isMenuOpen = ref(false);
-const showSearch = ref(false);
-const isShowingProfile = ref(false);
 
-const isLiked = ref(false);
-const likeCount = ref(0);
 const cartCount = ref(0);
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
-};
-
-const toggleSearch = () => {
-  showSearch.value = !showSearch.value;
-};
-
-const handleSearch = (query) => {
-  console.log("Searching for:", query);
-  showSearch.value = false;
-};
-
-const toggleProfile = () => {
-  isShowingProfile.value = !isShowingProfile.value;
-};
-
-const toggleLike = () => {
-  if (isLiked.value) {
-    isLiked.value = false;
-    likeCount.value--;
-  } else {
-    isLiked.value = true;
-    likeCount.value++;
-  }
 };
 
 const goToCart = () => {
@@ -122,7 +79,6 @@ const updateCartCount = () => {
 
 onMounted(() => {
   updateCartCount();
-  // Listen for cart updates
   window.addEventListener('cartUpdated', updateCartCount);
 });
 </script>
@@ -187,16 +143,6 @@ onMounted(() => {
       &:hover {
         color: #c39550;
       }
-    }
-
-    .liked {
-      color: #28a745 !important;
-    }
-
-    .like-count {
-      font-size: 1rem;
-      color: #28a745;
-      font-weight: 600;
     }
 
     .cart-wrapper {

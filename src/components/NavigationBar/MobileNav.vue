@@ -15,32 +15,14 @@
             <i class="fa-solid fa-cart-shopping" />
             <span v-if="cartCount > 0" class="cart-count">{{ cartCount }}</span>
           </li>
-          <li><i class="fa-solid fa-user" @click="toggleProfile" /></li>
-          <li><i class="fa-solid fa-magnifying-glass" @click="toggleSearch" /></li>
-          <li class="like-wrapper" @click="toggleLike">
-            <i
-              class="fa-solid fa-thumbs-up"
-              :class="{ liked: isLiked }"
-            />
-            <span v-if="likeCount > 0" class="like-count">{{ likeCount }}</span>
-          </li>
+          <li><i class="fa-solid fa-user"/></li>
         </ul>
-
-        <!-- Components -->
-        <Profile :visible="isShowingProfile" />
-        <SearchBar
-          :visible="showSearch"
-          @search="handleSearch"
-          @close="showSearch = false"
-        />
       </div>
     </div>
   </transition>
 </template>
 
 <script setup>
-import SearchBar from "./subComponents/SearchBar.vue";
-import Profile from "./subComponents/Profile.vue";
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 
@@ -51,35 +33,8 @@ defineProps({
   rightButtons: Array,
 });
 
-const showSearch = ref(false);
-const isShowingProfile = ref(false);
-
-const isLiked = ref(false);
-const likeCount = ref(0);
 const cartCount = ref(0);
 
-const toggleSearch = () => {
-  showSearch.value = !showSearch.value;
-};
-
-const handleSearch = (query) => {
-  console.log("Searching for:", query);
-  showSearch.value = false;
-};
-
-const toggleProfile = () => {
-  isShowingProfile.value = !isShowingProfile.value;
-};
-
-const toggleLike = () => {
-  if (isLiked.value) {
-    isLiked.value = false;
-    likeCount.value--;
-  } else {
-    isLiked.value = true;
-    likeCount.value++;
-  }
-};
 
 const goToCart = () => {
   router.push('/cart');
@@ -167,23 +122,6 @@ onMounted(() => {
         &:hover {
           color: #c39550;
         }
-      }
-
-      .like-wrapper {
-        position: relative;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-      }
-
-      .liked {
-        color: #28a745 !important;
-      }
-
-      .like-count {
-        font-size: 0.9rem;
-        color: #28a745;
-        font-weight: 600;
       }
 
       .cart-wrapper {
